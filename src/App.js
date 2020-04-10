@@ -3,14 +3,6 @@ import Todos from './components/Todos';
 
 import './App.css';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <Todos />
-//     </div>
-//   );
-// }
-
 class App extends Component {
   state = {
     todos: [
@@ -32,10 +24,20 @@ class App extends Component {
     ]
   }
 
+  // Toggle Completed
+  markComplete = (id) => {
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id) {
+        todo.completed = !todo.completed
+      }
+      return todo;
+    }) });
+  }
+
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} />
       </div>
     );
   }
